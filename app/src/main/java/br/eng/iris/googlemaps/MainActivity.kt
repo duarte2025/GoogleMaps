@@ -1,21 +1,14 @@
 package br.eng.iris.googlemaps
 
-import android.location.Location
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import br.eng.iris.googlemaps.entity.FullParameters
-import br.eng.iris.googlemaps.entity.HttpResponse
 import br.eng.iris.googlemaps.entity.LocEntity
-import br.eng.iris.googlemaps.infra.OperationMethod
-import br.eng.iris.googlemaps.repository.BaseRepository
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -29,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var location = LocEntity("", "", "0.0", "0.0", "")
-        class GetWeatherTask() : AsyncTask<Unit, Unit, String>() {
+        class GetWeatherTask : AsyncTask<Unit, Unit, String>() {
 
 
             override fun doInBackground(vararg params: Unit?): String? {
@@ -71,7 +64,9 @@ class MainActivity : AppCompatActivity() {
             googleMap = it
             val location1 = LatLng(location.latitude.toDouble(), location.longitude.toDouble())
             googleMap.addMarker(MarkerOptions().position(location1).title("Ligeirão"))
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location1, 3f))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 15f))
+            //googleMap.animateCamera(CameraUpdateFactory.zoomIn())
+
             } )
     }
 }
